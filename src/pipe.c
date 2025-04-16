@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:25:20 by ckappe            #+#    #+#             */
-/*   Updated: 2025/04/16 15:24:02 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/16 15:36:20 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ After setting up the redirection, the parent process closes both ends
 of the pipe to avoid interference.
  */
 
- void	pipex(t_data *data, char **env, int *fd)
+void	pipex(t_data *data, char **env, int *fd)
 {
 	data->pid1 = fork();
 	if (data->pid1 < 0)
@@ -45,7 +45,7 @@ of the pipe to avoid interference.
 	}
 	data->pid2 = fork();
 	if (data->pid2 < 0)
-	 error_handler("fork failed", errno);
+		error_handler("fork failed", errno);
 	if (data->pid2 == 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
@@ -57,4 +57,3 @@ of the pipe to avoid interference.
 	waitpid(data->pid1, NULL, 0);
 	waitpid(data->pid2, NULL, 0);
 }
-
