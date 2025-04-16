@@ -6,19 +6,13 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 19:47:57 by chiarakappe       #+#    #+#             */
-/*   Updated: 2025/04/10 16:23:34 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/16 15:00:20 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-
-// char	*find_exec(char **cmd, char **dirs)
-//		while (*dirs)
-//			strjoin temp
-//			strjoin path
-
-char	*_get_path(char **envp)
+static char	*_get_path(char **envp)
 {
 	char	*path;
 
@@ -31,6 +25,7 @@ char	*_get_path(char **envp)
 	}
 	return (path + 5);
 }
+
 static void	_init_files(char **av, t_data *data)
 {
 	data->fd_inp = open(av[1], O_RDONLY);
