@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:12:08 by ckappe            #+#    #+#             */
-/*   Updated: 2025/04/16 18:15:34 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/16 18:42:02 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free2d(char **a)
 	}
 	free(a);
 }
-
 
 void	freedata(t_data *data)
 {

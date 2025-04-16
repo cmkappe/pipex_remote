@@ -6,11 +6,55 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 19:47:57 by chiarakappe       #+#    #+#             */
-/*   Updated: 2025/04/16 15:00:20 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/16 19:02:53 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+char	*find_exec(char **cmd, char **dirs)
+{
+    char	*path;
+    char	*tmp;
+
+    if (!cmd || !cmd[0])
+        error_handler("Invalid command", errno);
+    while (*dirs)
+    {
+        tmp = ft_strjoin(*dirs, "/");
+        if (!tmp)
+            error_handler("Memory allocation failed", errno);
+        path = ft_strjoin(tmp, cmd[0]);
+        free(tmp);
+        if (!path)
+            error_handler("Memory allocation failed", errno);
+        if (access(path, X_OK) == 0)
+            return (path);
+        free(path);
+        dirs++;
+    }
+    error_handler("command not found", errno);
+    return (NULL);
+}
+
+/* char	*find_exec(char **cmd, char **dirs)
+{
+	char	*path;
+	char	*tmp;
+
+	while (*dirs)
+	{
+		tmp = ft_strjoin(*dirs, "/");
+		path = ft_strjoin(tmp, cmd[0]);
+		free(tmp);
+		if (access(path, X_OK) == 0)
+			return (path);
+		free(path);
+		dirs++;
+	}
+	error_handler("command not found", errno);
+	return (NULL);
+} */
 
 static char	*_get_path(char **envp)
 {
@@ -47,16 +91,6 @@ static void	_init_data(char **av, t_data *data, char **env)
 	data->cmd1_path = find_exec(data->cmd1, all_env_paths);
 	data->cmd2_path = find_exec(data->cmd2, all_env_paths);
 	free2d(all_env_paths);
-}
-
-static void	_init_files(char **av, t_data *data)
-{
-	data->fd_inp = open(av[1], O_RDONLY);
-	if (data->fd_inp < 0)
-		error_handler("cant open input file", errno);
-	data->fd_out = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (data->fd_out < 0)
-		error_handler("error with output file", errno);
 }
 
 int	main(int ac, char **av, char **env)

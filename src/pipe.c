@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:25:20 by ckappe            #+#    #+#             */
-/*   Updated: 2025/04/16 15:36:20 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/16 18:29:53 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	pipex(t_data *data, char **env, int *fd)
 	{
 		dup2(data->fd_inp, STDIN_FILENO);
 		dup2(fd[1], STDOUT_FILENO);
-		_closefds(data, fd);
+		_close_fds(data, fd);
 		execve(data->cmd1_path, data->cmd1, env);
 	}
 	data->pid2 = fork();
@@ -50,10 +50,10 @@ void	pipex(t_data *data, char **env, int *fd)
 	{
 		dup2(fd[0], STDIN_FILENO);
 		dup2(data->fd_out, STDOUT_FILENO);
-		_closefds(data, fd);
+		_close_fds(data, fd);
 		execve(data->cmd2_path, data->cmd2, env);
 	}
-	_closefds(data, fd);
+	_close_fds(data, fd);
 	waitpid(data->pid1, NULL, 0);
 	waitpid(data->pid2, NULL, 0);
 }
