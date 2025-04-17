@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 19:47:57 by chiarakappe       #+#    #+#             */
-/*   Updated: 2025/04/16 19:02:53 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/17 15:50:49 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,20 @@
 
 char	*find_exec(char **cmd, char **dirs)
 {
-    char	*path;
-    char	*tmp;
-
-    if (!cmd || !cmd[0])
-        error_handler("Invalid command", errno);
-    while (*dirs)
-    {
-        tmp = ft_strjoin(*dirs, "/");
-        if (!tmp)
-            error_handler("Memory allocation failed", errno);
-        path = ft_strjoin(tmp, cmd[0]);
-        free(tmp);
-        if (!path)
-            error_handler("Memory allocation failed", errno);
-        if (access(path, X_OK) == 0)
-            return (path);
-        free(path);
-        dirs++;
-    }
-    error_handler("command not found", errno);
-    return (NULL);
-}
-
-/* char	*find_exec(char **cmd, char **dirs)
-{
 	char	*path;
 	char	*tmp;
 
+	if (!cmd || !cmd[0])
+		error_handler("Invalid command", errno);
 	while (*dirs)
 	{
 		tmp = ft_strjoin(*dirs, "/");
+		if (!tmp)
+			error_handler("Memory allocation failed", errno);
 		path = ft_strjoin(tmp, cmd[0]);
 		free(tmp);
+		if (!path)
+			error_handler("Memory allocation failed", errno);
 		if (access(path, X_OK) == 0)
 			return (path);
 		free(path);
@@ -54,7 +35,7 @@ char	*find_exec(char **cmd, char **dirs)
 	}
 	error_handler("command not found", errno);
 	return (NULL);
-} */
+}
 
 static char	*_get_path(char **envp)
 {

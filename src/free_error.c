@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 15:12:08 by ckappe            #+#    #+#             */
-/*   Updated: 2025/04/16 18:42:02 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/17 14:45:46 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ void	error_handler(char *error, int exit_flag)
 
 void	free2d(char **a)
 {
-	while (*a)
+	int	i;
+
+	i = 0;
+	while (a[i])
 	{
-		free(*a);
-		a++;
+		free(a[i]);
+		i++;
 	}
 	free(a);
 }
