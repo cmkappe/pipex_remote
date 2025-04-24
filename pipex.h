@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:46:03 by ckappe            #+#    #+#             */
-/*   Updated: 2025/04/16 18:55:42 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:43:28 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ typedef struct s_data
 //--------------------------------Source-----------------------------------//
 void	pipex(t_data *data, char **env, int *fd);
 
-void	error_handler(char *error, int exit_flag);
+void	error_handler(t_data *data, char *error, int exit_flag, int num);
 void	free2d(char **a);
-void	freedata(t_data *data);
+void	freedata(t_data *data, int num);
 
 //--------------------------------Utils-----------------------------------//
-char	*find_exec(char **cmd, char **dirs);
+char	*find_exec(t_data *data, char **cmd, char **dirs);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 size_t	ft_strlen(const char *s);

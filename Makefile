@@ -11,7 +11,7 @@ SRC		=	$(SRC_DIR)/main.c \
 			$(UTILS_DIR)/ft_split.c
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -O2 -g
+CFLAGS	=	-Wall -Wextra -Werror -O2 -g -fsanitize=address
 
 OBJ		=	$(SRC:.c=.o)
 

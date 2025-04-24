@@ -6,7 +6,7 @@
 /*   By: ckappe <ckappe@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:25:20 by ckappe            #+#    #+#             */
-/*   Updated: 2025/04/16 18:29:53 by ckappe           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:43:02 by ckappe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	pipex(t_data *data, char **env, int *fd)
 {
 	data->pid1 = fork();
 	if (data->pid1 < 0)
-		error_handler("fork failed", errno);
+		error_handler(data, "fork failed", errno, 1);
 	if (data->pid1 == 0)
 	{
 		dup2(data->fd_inp, STDIN_FILENO);
@@ -45,7 +45,7 @@ void	pipex(t_data *data, char **env, int *fd)
 	}
 	data->pid2 = fork();
 	if (data->pid2 < 0)
-		error_handler("fork failed", errno);
+		error_handler(data, "fork failed", errno, 1);
 	if (data->pid2 == 0)
 	{
 		dup2(fd[0], STDIN_FILENO);
